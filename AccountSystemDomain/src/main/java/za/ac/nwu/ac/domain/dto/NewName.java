@@ -1,7 +1,7 @@
 package za.ac.nwu.ac.domain.dto;
 
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class NewName {
 }
