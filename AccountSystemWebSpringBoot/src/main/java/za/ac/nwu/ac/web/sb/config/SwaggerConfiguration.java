@@ -1,6 +1,5 @@
 package za.ac.nwu.ac.web.sb.config;
 
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,4 +46,3 @@ public class SwaggerConfiguration {
                 Collections.emptyList());
     }
 }
-

@@ -9,13 +9,14 @@
         <module name="AccountSystemDomain" />
         <module name="AccountSystemTranslator" />
         <module name="AccountSystemLogic" />
-        <module name="java" />
+        <module name="AccountSystemWeb" />
         <module name="AccountSystemWebSpringBoot" />
         <module name="AccountSystemRepository" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="AccountSystemWeb (1)" target="14" />
+      <module name="java" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -24,6 +25,7 @@
       <module name="AccountSystemLogic" options="-parameters" />
       <module name="AccountSystemRepository" options="-parameters" />
       <module name="AccountSystemTranslator" options="-parameters" />
+      <module name="AccountSystemWeb" options="-parameters" />
       <module name="AccountSystemWebSpringBoot" options="-parameters" />
       <module name="java" options="-parameters" />
     </option>
