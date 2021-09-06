@@ -12,6 +12,9 @@ import java.time.LocalDate;
 
 
 public class AccountType implements Serializable {
+
+    //private static final long serialVersionUID = .....?????
+
     @Id
     @SequenceGenerator(name = "VIT_RSA_GENERIC_SEQ", sequenceName = "VITRSA_SANDBOX.VIT_RSA_GENERIC_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VIT_RSA_GENERIC_SEQ")
