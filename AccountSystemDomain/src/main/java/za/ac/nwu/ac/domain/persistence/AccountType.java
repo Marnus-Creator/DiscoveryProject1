@@ -5,8 +5,10 @@ import jdk.vm.ci.meta.Local;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.lang.annotation.Target;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "DEMO_ACCOUNT_TYPE", schema = "MARNUS")     //Table name & Username (Schema might not be needed)
@@ -38,6 +40,9 @@ public class AccountType implements Serializable {
     private LocalDate creationDate; //use this date not something like utilDate
 
 
+    private Set<AccountTransaction> accountTransactions;
+
+
     //Use right-click > generate to generate public classes for each column (Revise DB entities vid at 12:30)
 
     public AccountType(long accountTypeID, long mnemonic, long accountTypeName, LocalDate creationDate) {
@@ -48,6 +53,12 @@ public class AccountType implements Serializable {
     }
 
     public AccountType() {
+    }
+
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    public Set<AccountTransaction> getAccountTransactions()
+    {
+        return accountTransactions;
     }
 
     public long getAccountTypeID() {
