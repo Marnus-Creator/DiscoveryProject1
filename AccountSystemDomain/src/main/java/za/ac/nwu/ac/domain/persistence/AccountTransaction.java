@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-//Fix Foreign key stuffies!!!!!!!!!!!!!!!!!!!
+
 
 @Entity
 @Table(name = "DEMO_ACCOUNT_TYPE", schema = "MARNUS")
@@ -20,7 +20,7 @@ public class AccountTransaction implements Serializable{
     private long transactionID;
 
     @Column(name = "ACCOUNT_TYPE_ID")
-    private long accountTypeId;
+    private AccountType accountType;
 
     @Column(name = "MEMBER_ID")
     private long memberId;
@@ -31,9 +31,9 @@ public class AccountTransaction implements Serializable{
     @Column(name = "TX_DATE")
     private long transactionDate;
 
-    public AccountTransaction(long transactionID, long accountTypeId, long memberId, long amount, long transactionDate) {
+    public AccountTransaction(long transactionID, AccountType accountType, long memberId, long amount, long transactionDate) {
         this.transactionID = transactionID;
-        this.accountTypeId = accountTypeId;
+        this.accountType = accountType;
         this.memberId = memberId;
         this.amount = amount;
         this.transactionDate = transactionDate;
@@ -50,12 +50,14 @@ public class AccountTransaction implements Serializable{
         this.transactionID = transactionID;
     }
 
-    public long getAccountTypeId() {
-        return accountTypeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ACCOUNT_TYPE_ID")
+    public AccountType getAccountType() {
+        return accountType;
     }
 
-    public void setAccountTypeId(long accountTypeId) {
-        this.accountTypeId = accountTypeId;
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
     public long getMemberId() {
@@ -87,19 +89,19 @@ public class AccountTransaction implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransaction that = (AccountTransaction) o;
-        return transactionID == that.transactionID && accountTypeId == that.accountTypeId && memberId == that.memberId && amount == that.amount && transactionDate == that.transactionDate;
+        return transactionID == that.transactionID && accountType == that.accountType && memberId == that.memberId && amount == that.amount && transactionDate == that.transactionDate;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionID, accountTypeId, memberId, amount, transactionDate);
+        return Objects.hash(transactionID, accountType, memberId, amount, transactionDate);
     }
 
     @Override
     public String toString() {
         return "AccountTransaction{" +
                 "transactionID=" + transactionID +
-                ", accountTypeId=" + accountTypeId +
+                ", accountType=" + accountType +
                 ", memberId=" + memberId +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate +
