@@ -3,6 +3,8 @@ package za.ac.nwu.ac.domain.persistence;
 
 //import jdk.vm.ci.meta.Local;
 
+//This class is only used to carry data (does not actually do anything other than that )
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.lang.annotation.Target;
@@ -20,26 +22,17 @@ public class AccountType implements Serializable {
 
     //Columns in Table follow:
     //This Column is a primary column and the keys are generated with this sequence Generator
-    @Id
-    @SequenceGenerator(name = "VIT_RSA_GENERIC_SEQ", sequenceName = "MARNUS.VIT_RSA_GENERIC_SEQ", allocationSize = 1)       //SequenceName =?
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VIT_RSA_GENERIC_SEQ")
-    @Column(name = "ACCOUNT_TYPE_ID") //Primary key column
+
     private long accountTypeID;
-
-    @Column(name = "MNEMONIC") //mnemonic column
     private long mnemonic;
-
-    @Column(name = "ACCOUNT_TYPE_NAME") //accountTypeName column
     private long accountTypeName;
 
     //These Date conventions are for services (can remove it here):
     // @JsonSerialize(using = LocalDateSerializer.class)
     //@JsonDeserialize(using = LocalDateDeserializer.class)
-
-    @Column(name = "CREATION_DATE")
     private LocalDate creationDate; //use this date not something like utilDate
 
-
+    //@Column(name="ACCOUNT_TRANSACTIONS")
     private Set<AccountTransaction> accountTransactions;
 
 
@@ -55,12 +48,12 @@ public class AccountType implements Serializable {
     public AccountType() {
     }
 
-    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    public Set<AccountTransaction> getAccountTransactions()
-    {
-        return accountTransactions;
-    }
 
+
+    @Id
+    @SequenceGenerator(name = "VIT_RSA_GENERIC_SEQ", sequenceName = "MARNUS.VIT_RSA_GENERIC_SEQ", allocationSize = 1)       //SequenceName =?
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "VIT_RSA_GENERIC_SEQ")
+    @Column(name = "ACCOUNT_TYPE_ID") //Primary key column
     public long getAccountTypeID() {
         return accountTypeID;
     }
@@ -69,6 +62,7 @@ public class AccountType implements Serializable {
         this.accountTypeID = accountTypeID;
     }
 
+    @Column(name = "MNEMONIC") //mnemonic column
     public long getMnemonic() {
         return mnemonic;
     }
@@ -77,6 +71,7 @@ public class AccountType implements Serializable {
         this.mnemonic = mnemonic;
     }
 
+    @Column(name = "ACCOUNT_TYPE_NAME") //accountTypeName column
     public long getAccountTypeName() {
         return accountTypeName;
     }
@@ -85,12 +80,23 @@ public class AccountType implements Serializable {
         this.accountTypeName = accountTypeName;
     }
 
+    @Column(name = "CREATION_DATE")
     public LocalDate getCreationDate() {
         return creationDate;
     }
 
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
+    }
+
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    public Set<AccountTransaction> getAccountTransactions()
+    {
+        return accountTransactions;
+    }
+
+    public void setAccountTransactions(Set<AccountTransaction> accountTransactions) {
+        this.accountTransactions = accountTransactions;
     }
 
     @Override

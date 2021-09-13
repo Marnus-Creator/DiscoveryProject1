@@ -1,5 +1,7 @@
 package za.ac.nwu.ac.domain.service;
 
+//This class is used to display General responses in the Spring UI
+
 import java.io.Serializable;
 import java.util.Objects;
 

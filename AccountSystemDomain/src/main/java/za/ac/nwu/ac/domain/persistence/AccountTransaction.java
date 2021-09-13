@@ -1,5 +1,7 @@
 package za.ac.nwu.ac.domain.persistence;
 
+//This class is only used to carry data (does not actually do anything other than that )
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -83,6 +85,7 @@ public class AccountTransaction implements Serializable{
     public void setTransactionDate(long transactionDate) {
         this.transactionDate = transactionDate;
     }
+
 
     @Override
     public boolean equals(Object o) {

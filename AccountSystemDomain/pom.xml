@@ -15,17 +15,17 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <dependency>
+        <dependency>                                            <!--Need this dependency here-->
             <groupId>javax.persistence</groupId>
             <artifactId>javax.persistence-api</artifactId>
-            <scope>provided</scope>
+            <scope>provided</scope>                             <!--Provided by SpringBoot-->
         </dependency>
-        <dependency>
+        <!--<dependency>                                        Might not Need this dependency here, might be in Parent POM&ndash;&gt;
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <scope>compile</scope>
-        </dependency>
-        <!--<dependency>
+        </dependency>-->
+        <!--<dependency>                                        Do not need Lombok dependency, is already added automatically
             <groupId>org.projectLombok</groupId>
             <artifactId>lombok</artifactId>
             <version></version>
