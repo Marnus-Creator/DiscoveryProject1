@@ -20,7 +20,7 @@
             <artifactId>javax.persistence-api</artifactId>
             <scope>provided</scope>                             <!--Provided by SpringBoot-->
         </dependency>
-        <!--<dependency>                                        Might not Need this dependency here, might be in Parent POM&ndash;&gt;
+        <!--<dependency>                                        Might not Need this dependency here, might be in Parent POM
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <scope>compile</scope>
