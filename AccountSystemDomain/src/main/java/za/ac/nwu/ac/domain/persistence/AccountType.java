@@ -7,7 +7,6 @@ package za.ac.nwu.ac.domain.persistence;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.lang.annotation.Target;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
@@ -24,8 +23,9 @@ public class AccountType implements Serializable {
     //This Column is a primary column and the keys are generated with this sequence Generator
 
     private long accountTypeID;
-    private long mnemonic;
-    private long accountTypeName;
+    private String mnemonic;
+    private String accountTypeName;
+
 
     //These Date conventions are for services (can remove it here):
     // @JsonSerialize(using = LocalDateSerializer.class)
@@ -38,7 +38,7 @@ public class AccountType implements Serializable {
 
     //Use right-click > generate to generate public classes for each column (Revise DB entities vid at 12:30)
 
-    public AccountType(long accountTypeID, long mnemonic, long accountTypeName, LocalDate creationDate) {
+    public AccountType(long accountTypeID, String mnemonic, String accountTypeName, LocalDate creationDate) {
         this.accountTypeID = accountTypeID;
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
@@ -63,20 +63,20 @@ public class AccountType implements Serializable {
     }
 
     @Column(name = "MNEMONIC") //mnemonic column
-    public long getMnemonic() {
+    public String getMnemonic() {
         return mnemonic;
     }
 
-    public void setMnemonic(long mnemonic) {
+    public void setMnemonic(String  mnemonic) {
         this.mnemonic = mnemonic;
     }
 
     @Column(name = "ACCOUNT_TYPE_NAME") //accountTypeName column
-    public long getAccountTypeName() {
+    public String getAccountTypeName() {
         return accountTypeName;
     }
 
-    public void setAccountTypeName(long accountTypeName) {
+    public void setAccountTypeName(String accountTypeName) {
         this.accountTypeName = accountTypeName;
     }
 
