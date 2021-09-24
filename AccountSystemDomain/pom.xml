@@ -20,6 +20,14 @@
             <artifactId>javax.persistence-api</artifactId>
             <scope>provided</scope>                             <!--Provided by SpringBoot-->
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
         <!--<dependency>                                        Might not Need this dependency here, might be in Parent POM
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
