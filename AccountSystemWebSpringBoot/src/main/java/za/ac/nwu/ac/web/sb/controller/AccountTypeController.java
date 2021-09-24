@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -60,6 +61,26 @@ public class AccountTypeController {
     {
         AccountTypeDto accountTypeResponse = createAccountTypeFlow.create(accountType);
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountTypeResponse);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("{mnemonic}")
+    @ApiOperation(value = "Fetches the specified AccountType.", notes = "Fetches the new AccountType corresponding to the given mnemonic.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Goal Found"),
+            @ApiResponse(code = 400, message = "Sorry, Bad request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Resource NOT FOUND", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
+    })
+    public ResponseEntity<GeneralResponse<AccountTypeDto>> getAccountType(
+            @ApiParam(value = "The mnemnonic that uniquely idendtifies the AccountType.",
+                    example = "MILES",
+                    name = "mnemonic",
+                    required = true)
+            @PathVariable("mnemonic") final String mnemonic)
+    {
+        AccountTypeDto accountType = fetchAccountTypeFlow.getAccountTypeByMnemonic(mnemonic);
+        GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountType);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

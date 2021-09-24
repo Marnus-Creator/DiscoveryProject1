@@ -19,7 +19,7 @@ public class AccountTypeDto implements Serializable {
     private String accountTypeName;
     private LocalDate creationDate;
 
-    public AccountTypeDto(){
+    public AccountTypeDto(AccountTypeDto accountType){
     }
 
     public AccountTypeDto(String mnemonic, String accountTypeName, LocalDate creationDate) {
