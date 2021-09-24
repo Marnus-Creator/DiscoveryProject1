@@ -15,17 +15,16 @@ public class CreateAccountTypeFlowImpl implements CreateAccountTypeFlow {
 
     private final AccountTypeTranslator accountTypeTranslator;
 
-    //@Autowired
-    public CreateAccountTypeFlowImpl(AccountTypeTranslator accountTypeTranslator) {
+    public CreateAccountTypeFlowImpl(AccountTypeTranslator accountTypeTranslator)
+    {
         this.accountTypeTranslator = accountTypeTranslator;
     }
 
     @Override
-    public AccountTypeDto create(AccountTypeDto accountType){
-//        if(null == accountType.getMnemonic()){
-//            accountType.setMnemonic();
-//        }
-        if(null==accountType.getCreationDate()){
+    public AccountTypeDto create(AccountTypeDto accountType)
+    {
+        if(null==accountType.getCreationDate())
+        {
             accountType.setCreationDate(LocalDate.now());
         }
         return accountTypeTranslator.create(accountType);

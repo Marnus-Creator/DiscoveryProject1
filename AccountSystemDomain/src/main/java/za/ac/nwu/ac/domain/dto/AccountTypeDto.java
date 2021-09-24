@@ -27,12 +27,12 @@ public class AccountTypeDto implements Serializable {
         this.accountTypeName = accountTypeName;
         this.creationDate = creationDate;
     }
-
     public AccountTypeDto(AccountType accountType){
         this.setMnemonic(accountType.getMnemonic());
         this.setAccountTypeName(accountType.getAccountTypeName());
         this.setCreationDate(accountType.getCreationDate());
     }
+
     @ApiModelProperty(position = 1,
             value = "AccountType Mnemonic",
             name = "Mnemonic",
@@ -40,11 +40,11 @@ public class AccountTypeDto implements Serializable {
             dataType = "java.lang.String",
             example = "MILES",
             required = true)
+
     public String getMnemonic()
     {
         return mnemonic;
     }
-
     public void setMnemonic(String mnemonic) {
         this.mnemonic = mnemonic;
     }
@@ -56,10 +56,10 @@ public class AccountTypeDto implements Serializable {
             dataType = "java.lang.String",
             example = "Miles",
             required = true)
+
     public String getAccountTypeName() {
         return accountTypeName;
     }
-
     public void setAccountTypeName(String accountTypeName) {
         this.accountTypeName = accountTypeName;
     }
@@ -71,10 +71,10 @@ public class AccountTypeDto implements Serializable {
             dataType = "java.lang.String",
             example = "2020-01-01",
             allowEmptyValue = true)
+
     public LocalDate getCreationDate() {
         return creationDate;
     }
-
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
@@ -99,13 +99,13 @@ public class AccountTypeDto implements Serializable {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "AccountTypeDto{" +
                 "mnemonic='" + mnemonic + '\'' +
                 ", accountTypeName='" + accountTypeName + '\'' +
                 ", creationDate=" + creationDate +
                 '}';
     }
-
 
 }
