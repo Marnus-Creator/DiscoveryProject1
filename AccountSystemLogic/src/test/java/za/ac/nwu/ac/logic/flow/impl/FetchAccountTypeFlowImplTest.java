@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.*;                       //Alt+Enter to add dependency (But had issues so created dependency manually)
 public class FetchAccountTypeFlowImplTest {
 
     private FetchAccountTypeFlowImpl classToTest;

@@ -39,7 +39,7 @@ public class FetchAccountTypeFlowImpl implements FetchAccountTypeFlow {
         return accountTypeTranslator.getAccountTypeByMnemonic(mnemonic);
     }
 
-    public boolean methodToTest()                                                           //Method for Unit Testing;   Make sure Test directory "java" is marked as 'source root' (must be green)
+    public boolean methodToTest()                                                           //Method for Unit Testing;  Make sure Test directory "java" is marked as 'source root' (must be green)
     {
         return true;
     }
