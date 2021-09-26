@@ -25,8 +25,6 @@ public class AccountType implements Serializable {
     private long accountTypeID;
     private String mnemonic;
     private String accountTypeName;
-
-
     //These Date conventions are for services (can remove it here):
     // @JsonSerialize(using = LocalDateSerializer.class)
     //@JsonDeserialize(using = LocalDateDeserializer.class)
@@ -35,9 +33,10 @@ public class AccountType implements Serializable {
     //@Column(name="ACCOUNT_TRANSACTIONS")
     private Set<AccountTransaction> accountTransactions;
 
+    public AccountType() {
+    }
 
     //Use right-click > generate to generate public classes for each column (Revise DB entities vid at 12:30)
-
     public AccountType(long accountTypeID, String mnemonic, String accountTypeName, LocalDate creationDate) {
         this.accountTypeID = accountTypeID;
         this.mnemonic = mnemonic;
@@ -45,7 +44,11 @@ public class AccountType implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public AccountType(String mnemonic, String accountTypeName, LocalDate creationDate) {
+    public AccountType(String mnemonic, String accountTypeName, LocalDate creationDate)
+    {
+        this.mnemonic = mnemonic;
+        this.accountTypeName = accountTypeName;
+        this.creationDate = creationDate;
     }
 
 
