@@ -28,7 +28,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
             }
         } catch (Exception e) {
             // TODO: Log
-            throw new RuntimeException("Unable to read from the database",e);
+            throw new RuntimeException("Sorry, Unable to read from the database",e);
         }
         return accountTypeDtos;
     }
@@ -39,7 +39,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
             AccountType accountType = accountTypeRepository.save(accountTypeDto.getAccountType());
             return new AccountTypeDto(accountType);
         } catch (Exception e) {
-            throw new RuntimeException("Unable to save to the database",e);
+            throw new RuntimeException("Sorry, Unable to save to the database",e);
         }
     }
 
@@ -49,7 +49,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
             AccountType accountType = accountTypeRepository.getAccountTypeByMnemonicNativeQuery(mnemonic);
             return new AccountTypeDto(accountType);
         } catch (Exception e) {
-            throw new RuntimeException("Unable to read from the database",e);
+            throw new RuntimeException("Sorry, Unable to read from the database",e);
         }
     }
 
@@ -59,7 +59,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
             AccountType accountType = accountTypeRepository.getAccountTypeByMnemonic(mnemonic);
             return new AccountTypeDto(accountType);
         } catch (Exception e) {
-            throw new RuntimeException("Unable to read from the database",e);
+            throw new RuntimeException("Sorry, Unable to read from the database",e);
         }
     }
 
@@ -69,7 +69,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
             AccountType accountType = accountTypeRepository.getAccountTypeDtoByMnemonic(mnemonic);
             return new AccountTypeDto(accountType);
         } catch (Exception e) {
-            throw new RuntimeException("Unable to read from the database",e);
+            throw new RuntimeException("Sorry, Unable to read from the database",e);
         }
     }
 }

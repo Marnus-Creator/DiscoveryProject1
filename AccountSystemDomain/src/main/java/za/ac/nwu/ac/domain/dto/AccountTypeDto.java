@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@ApiModel(value = "AccountType", description = "A DTO that represents the AccountType")
+@ApiModel(value = "AccountType", description = "The DTO representing the AccountType")
 public class AccountTypeDto implements Serializable
 {
     private static final long serialVersionUID = 2538138663972118712L;
@@ -54,7 +54,7 @@ public class AccountTypeDto implements Serializable
             position = 2,
             value = "AccountType Name",
             name = "Name",
-            notes = "The name of the account type",
+            notes = "Name of the account type",
             dataType = "java.lang.String",
             example = "Miles",
             allowEmptyValue = false,
@@ -72,7 +72,7 @@ public class AccountTypeDto implements Serializable
             position = 3,
             value = "AccountType Creation Date",
             name = "CreationDate",
-            notes = "This is the date on which the account type was created",
+            notes = "The date on which the account type was created",
             dataType = "java.lang.String",
             example = "2021-01-01",
             allowEmptyValue = true
