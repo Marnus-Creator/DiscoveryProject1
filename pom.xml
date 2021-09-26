@@ -92,7 +92,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
+        <dependency>                                                    <!--Dependency for unit testing-->
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
