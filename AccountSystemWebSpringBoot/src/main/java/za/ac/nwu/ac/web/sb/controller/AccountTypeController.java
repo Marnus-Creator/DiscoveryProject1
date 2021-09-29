@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiResponses;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import za.ac.nwu.ac.domain.service.GeneralResponse;
 import za.ac.nwu.ac.logic.flow.CreateAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -55,7 +57,7 @@ public class AccountTypeController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
     })
     public ResponseEntity<GeneralResponse<AccountTypeDto>> create(
-            @ApiParam(value = "Request body to create new AcountType.", required = true)
+            @ApiParam(value = "Request body to create new AccountType.", required = true)
             @RequestBody AccountTypeDto accountType)                                    //Need to request the body (input) to be displayed
     {
         AccountTypeDto accountTypeResponse = createAccountTypeFlow.create(accountType);
@@ -68,15 +70,15 @@ public class AccountTypeController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Goal Found"),
             @ApiResponse(code = 400, message = "Sorry, Bad request", response = GeneralResponse.class),
-            @ApiResponse(code = 404, message = "Resource NOT FOUND", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Resource is NOT FOUND", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
     })
     public ResponseEntity<GeneralResponse<AccountTypeDto>> getAccountType(
-            @ApiParam(value = "The mnemnonic that uniquely idendtifies the AccountType.",
+            @ApiParam(value = "The mnemonic that uniquely identifies the AccountType.",
                     example = "MILES",
                     name = "mnemonic",
                     required = true)
-            @PathVariable("mnemonic") final String mnemonic)                            //Typically a mandatory PathVariable
+            @PathVariable("mnemonic") final String mnemonic)                            //Typically a mandatory PathVariable is needed
     {
         AccountTypeDto accountType = fetchAccountTypeFlow.getAccountTypeByMnemonic(mnemonic);
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountType);
@@ -84,7 +86,7 @@ public class AccountTypeController {
     }
 
  /*   @DeleteMapping("{mnemonic}")
-    @ApiOperation(value = "Deletes the specified AccountType.", notes = "Deletes the AccountType corresponding to the given mnemonic")
+    @ApiOperation(value = "Deletes the specified AccountType.", notes = "Deletes the AccountType corresponding to the given mnemonic.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "AccountType deleted"),
             @ApiResponse(code = 400, message = "Sorry, Bad request", response = GeneralResponse.class),
@@ -92,13 +94,43 @@ public class AccountTypeController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
     })
     public ResponseEntity<GeneralResponse<AccountTypeDto>> deleteAccountType(
-            @ApiParam(value = "The mnemnonic that uniquely idendtifies the AccountType.",
+            @ApiParam(value = "The mnemnonic that uniquely identifies the AccountType.",
                     example = "MILES",
                     name = "mnemonic",
                     required = true)
             @PathVariable("mnemonic") final String mnemonic)
     {
         AccountTypeDto accountType = modifyAccountTypeFlow.deleteAcountType(mnemonic);      //Todo need to create modifyAccountTypeFlow
+        GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountType);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }*/
+
+    /*@PutMapping("{mnemonic}")
+    @ApiOperation(value = "Updates the specified AccountType.", notes = "Updates the new AccountType corresponding to the given mnemonic.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "AccountType Updated"),
+            @ApiResponse(code = 400, message = "Sorry, Bad request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Resource is NOT FOUND", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
+    })
+    public ResponseEntity<GeneralResponse<AccountTypeDto>> updateAccountType(
+            @ApiParam(value = "The mnemonic that uniquely identifies the AccountType.",
+                    example = "MILES",
+                    name = "mnemonic",
+                    required = true)
+            @PathVariable("mnemonic") final String mnemonic,                     //Typically a mandatory PathVariable is needed
+
+            @ApiParam(value = "The new AccountTypeName that the specified AccountType should update with.",
+                    name = "newAccountTypeName",
+                    required = true)
+            @RequestParam("newAccountTypeName") final String newAccountTypeName,
+
+            @ApiParam(value = "The optional new date with which to update the CreationDate in ISO date format (yyyy-MM-dd)")
+            @RequestParam(value = "newCreationDate", required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                    LocalDate newCreationDate
+    ){
+        AccountTypeDto accountType = modifyAccountTypeFlow.updateAccountType(mnemonic, newAccountTypeName, newCreationDate);      //Todo need to create modifyAccountTypeFlow
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountType);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }*/
