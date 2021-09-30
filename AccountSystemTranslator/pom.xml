@@ -28,5 +28,14 @@
         </dependency>
     </dependencies>
 
+    <!--<build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>org.jacoco.build</artifactId>
+            </plugin>
+        </plugins>
+    </build>-->
+
     
 </project>
