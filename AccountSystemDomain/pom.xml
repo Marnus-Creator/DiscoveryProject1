@@ -40,14 +40,14 @@
         </dependency>-->
     </dependencies>
 
-    <!--<build>                                                 &lt;!&ndash;Build for code coverage&ndash;&gt;
+    <build>                                                 <!--Build for code coverage-->
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
             </plugin>
         </plugins>
-    </build>-->
+    </build>
 
     
 </project>

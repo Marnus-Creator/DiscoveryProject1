@@ -152,17 +152,17 @@
                                 <limits>
                                     <limit>
                                         <counter>INSTRUCTION</counter>
-                                        <value>CVEREDRATIO</value>
+                                        <value>COVEREDRATIO</value>
                                         <minimum>0.8</minimum>
                                     </limit>
                                     <limit>
                                         <counter>LINE</counter>
-                                        <value>CVEREDRATIO</value>
+                                        <value>COVEREDRATIO</value>
                                         <minimum>0.8</minimum>
                                     </limit>
                                     <limit>
                                         <counter>BRANCH</counter>
-                                        <value>CVEREDRATIO</value>
+                                        <value>COVEREDRATIO</value>
                                         <minimum>0.8</minimum>
                                     </limit>
                                 </limits>

@@ -72,4 +72,6 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
             throw new RuntimeException("Sorry, Unable to read from the database",e);
         }
     }
+
+    //TODO: Remember to mark Updates, deletes and modifies with @Transaction
 }
