@@ -13,8 +13,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "DEMO_ACCOUNT_TYPE", schema = "MARNUS")     //Table name & Username (Schema might not be needed)
-
-
 public class AccountType implements Serializable {
 
     private static final long serialVersionUID = 3866606557126890054L;
