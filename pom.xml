@@ -25,7 +25,7 @@
         <swagger.version>1.5.20</swagger.version>
         <!--        <springfox-bean.version>2.4.5</springfox-bean.version>-->
 
-        <haltOnFailure>true</haltOnFailure>                                            <!--******!!! Should be true !!!******-->
+        <haltOnFailure>false</haltOnFailure>                                            <!--******!!! Should be true !!!******-->
     </properties>
 
     <modules>
