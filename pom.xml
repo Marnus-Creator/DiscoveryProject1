@@ -134,7 +134,7 @@
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>2.1.6.RELEASE</version>
                 </plugin>
-                <plugin>                                <!--Plugin for jaco to check code coverage-->
+                <plugin>                                <!--Plugin for jacoco to check code coverage-->
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>0.8.3</version>

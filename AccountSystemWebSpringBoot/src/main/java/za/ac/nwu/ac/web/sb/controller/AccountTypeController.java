@@ -5,20 +5,17 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.ac.domain.dto.AccountTypeDto;
-import za.ac.nwu.ac.domain.persistence.AccountType;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
 import za.ac.nwu.ac.logic.flow.CreateAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
+import za.ac.nwu.ac.logic.flow.ModifyAccountTypeFlow;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -27,12 +24,16 @@ public class AccountTypeController {
 
     private final FetchAccountTypeFlow fetchAccountTypeFlow;
     private final CreateAccountTypeFlow createAccountTypeFlow;
+    private final ModifyAccountTypeFlow modifyAccountTypeFlow;
 
     @Autowired
-    public AccountTypeController(FetchAccountTypeFlow fetchAccountTypeFlow, @Qualifier("createAccountTypeFlowName") CreateAccountTypeFlow createAccountTypeFlow)
+    public AccountTypeController(FetchAccountTypeFlow fetchAccountTypeFlow,
+                                 @Qualifier("createAccountTypeFlowName") CreateAccountTypeFlow createAccountTypeFlow,
+                                 ModifyAccountTypeFlow modifyAccountTypeFlow)
     {
         this.fetchAccountTypeFlow = fetchAccountTypeFlow;
         this.createAccountTypeFlow = createAccountTypeFlow;
+        this.modifyAccountTypeFlow = modifyAccountTypeFlow;
     }
 
     @GetMapping("/all")
@@ -78,14 +79,14 @@ public class AccountTypeController {
                     example = "MILES",
                     name = "mnemonic",
                     required = true)
-            @PathVariable("mnemonic") final String mnemonic)                            //Typically a mandatory PathVariable is needed
+            @PathVariable("mnemonic") final String mnemonic)                            //Typically a mandatory, PathVariable is needed
     {
         AccountTypeDto accountType = fetchAccountTypeFlow.getAccountTypeByMnemonic(mnemonic);
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountType);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
- /*   @DeleteMapping("{mnemonic}")
+    @DeleteMapping("{mnemonic}")
     @ApiOperation(value = "Deletes the specified AccountType.", notes = "Deletes the AccountType corresponding to the given mnemonic.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "AccountType deleted"),
@@ -100,10 +101,10 @@ public class AccountTypeController {
                     required = true)
             @PathVariable("mnemonic") final String mnemonic)
     {
-        AccountTypeDto accountType = modifyAccountTypeFlow.deleteAcountType(mnemonic);      //Todo need to create modifyAccountTypeFlow
+        AccountTypeDto accountType = modifyAccountTypeFlow.deleteAcountType(mnemonic);
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountType);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }*/
+    }
 
     /*@PutMapping("{mnemonic}")
     @ApiOperation(value = "Updates the specified AccountType.", notes = "Updates the new AccountType corresponding to the given mnemonic.")

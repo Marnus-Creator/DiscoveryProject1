@@ -1,5 +1,8 @@
 package za.ac.nwu.ac.translator.impl;
+//TODO: Remember to mark Updates, deletes and modifies with @Transaction
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.ac.domain.dto.AccountTypeDto;
@@ -7,11 +10,13 @@ import za.ac.nwu.ac.domain.persistence.AccountType;
 import za.ac.nwu.ac.repo.persistence.AccountTypeRepository;
 import za.ac.nwu.ac.translator.AccountTypeTranslator;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountTypeTranslatorImpl.class);
     private final AccountTypeRepository accountTypeRepository;
 
     @Autowired
@@ -19,6 +24,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
         this.accountTypeRepository = accountTypeRepository;
     }
 
+    @Transactional
     @Override
     public List<AccountTypeDto> getAllAccountTypes() {
         List<AccountTypeDto> accountTypeDtos = new ArrayList<>();
@@ -33,6 +39,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
         return accountTypeDtos;
     }
 
+    @Transactional
     @Override
     public AccountTypeDto create(AccountTypeDto accountTypeDto) {
         try {
@@ -43,6 +50,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
         }
     }
 
+
     @Override
     public AccountTypeDto getAccountTypeByMnemonicNativeQuery(String mnemonic) {
         try {
@@ -52,7 +60,6 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
             throw new RuntimeException("Sorry, Unable to read from the database",e);
         }
     }
-
     @Override
     public AccountTypeDto getAccountTypeByMnemonic(String mnemonic) {
         try {
@@ -62,7 +69,6 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
             throw new RuntimeException("Sorry, Unable to read from the database",e);
         }
     }
-
     @Override
     public AccountTypeDto getAccountTypeDtoByMnemonic(String mnemonic) {
         try {
@@ -73,5 +79,27 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
         }
     }
 
-    //TODO: Remember to mark Updates, deletes and modifies with @Transaction
+    @Override
+    @Transactional
+    public AccountTypeDto deleteAcountType(String mnemonic) {
+        try{
+            AccountType accountType = accountTypeRepository.getAccountTypeByMnemonic(mnemonic);
+            accountTypeRepository.deleteAcountType(mnemonic);
+            return new AccountTypeDto(accountType);        }catch (Exception e){
+            throw new RuntimeException("Unable to read from DB ", e);
+        }
+    }
+
+    @Override
+    @Transactional
+    public AccountTypeDto updateAccountType(AccountTypeDto accountType) {
+        try{
+            accountTypeRepository.updateAccountType(accountType.getMnemonic(), accountType.getAccountTypeName(),
+                    accountType.getCreationDate());
+            return accountType;
+        }catch (Exception e){
+            throw new RuntimeException( "Unable to update DB ", e);
+        }
+    }
+
 }
