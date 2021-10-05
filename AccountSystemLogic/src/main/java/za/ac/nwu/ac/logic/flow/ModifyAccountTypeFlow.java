@@ -5,7 +5,8 @@ import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import java.time.LocalDate;
 
 public interface ModifyAccountTypeFlow {
-    AccountTypeDto deleteAcountType(String mnemonic);
+    AccountTypeDto deleteAccountType(String mnemonic);
     AccountTypeDto updateAccountType(AccountTypeDto accountType);
-    //AccountTypeDto updateAccountType(String mnemonic, String newAccountTypeName, LocalDate newCreationDate);
+
+
 }

@@ -23,7 +23,7 @@ public class ModifyAccountTypeFlowImpl implements ModifyAccountTypeFlow {
     }
 
     @Override
-    public AccountTypeDto deleteAcountType(String mnemonic) {
+    public AccountTypeDto deleteAccountType(String mnemonic) {
         LOGGER.info("AccountType to be deleted, use {}", mnemonic);
 
         AccountTypeDto result =accountTypeTranslator.deleteAcountType(mnemonic);

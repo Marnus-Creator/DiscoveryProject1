@@ -103,7 +103,7 @@ public class AccountTypeController {
                     required = true)
             @PathVariable("mnemonic") final String mnemonic)
     {
-        AccountTypeDto accountType = modifyAccountTypeFlow.deleteAcountType(mnemonic);
+        AccountTypeDto accountType = modifyAccountTypeFlow.deleteAccountType(mnemonic);
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountType);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
