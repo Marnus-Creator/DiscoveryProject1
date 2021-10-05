@@ -8,5 +8,4 @@ public interface ModifyAccountTypeFlow {
     AccountTypeDto deleteAccountType(String mnemonic);
     AccountTypeDto updateAccountType(AccountTypeDto accountType);
 
-
 }

@@ -130,12 +130,13 @@ public class AccountTypeController {
 
             @ApiParam(value = "The optional new date with which to update the CreationDate in ISO date format (yyyy-MM-dd)")
             @RequestParam(value = "newCreationDate", required = false)
+
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
                     LocalDate newCreationDate)
     {
         //AccountTypeDto accountType = modifyAccountTypeFlow.updateAccountType(mnemonic,newAccountTypeName, newCreationDate);
 
-        AccountTypeDto tempAccTpeDto= fetchAccountTypeFlow.getAccountTypeByMnemonic(mnemonic);
+        AccountTypeDto tempAccTpeDto = fetchAccountTypeFlow.getAccountTypeByMnemonic(mnemonic);
         if(null == newCreationDate)
         {
             newCreationDate = tempAccTpeDto.getCreationDate();              //Set the creation date to today's date if none is provided
@@ -143,7 +144,7 @@ public class AccountTypeController {
         AccountTypeDto accountType = new AccountTypeDto(mnemonic, newAccountTypeName, newCreationDate);
         AccountTypeDto accountTypeResponse = modifyAccountTypeFlow.updateAccountType(accountType);
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountType);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
