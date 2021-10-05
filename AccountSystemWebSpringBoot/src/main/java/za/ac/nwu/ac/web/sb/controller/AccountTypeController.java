@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import za.ac.nwu.ac.logic.flow.CreateAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.FetchAccountTypeFlow;
 import za.ac.nwu.ac.logic.flow.ModifyAccountTypeFlow;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -106,7 +108,7 @@ public class AccountTypeController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    /*@PutMapping("{mnemonic}")
+    @PutMapping("{mnemonic}")
     @ApiOperation(value = "Updates the specified AccountType.", notes = "Updates the new AccountType corresponding to the given mnemonic.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "AccountType Updated"),
@@ -124,17 +126,26 @@ public class AccountTypeController {
             @ApiParam(value = "The new AccountTypeName that the specified AccountType should update with.",
                     name = "newAccountTypeName",
                     required = true)
-            @RequestParam("newAccountTypeName") final String newAccountTypeName,
+            @RequestParam(value = "newAccountTypeName") final String newAccountTypeName,
 
             @ApiParam(value = "The optional new date with which to update the CreationDate in ISO date format (yyyy-MM-dd)")
             @RequestParam(value = "newCreationDate", required = false)
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-                    LocalDate newCreationDate
-    ){
-        AccountTypeDto accountType = modifyAccountTypeFlow.updateAccountType(mnemonic, newAccountTypeName, newCreationDate);      //Todo need to create modifyAccountTypeFlow
+                    LocalDate newCreationDate)
+    {
+        //AccountTypeDto accountType = modifyAccountTypeFlow.updateAccountType(mnemonic,newAccountTypeName, newCreationDate);
+
+        AccountTypeDto tempAccTpeDto= fetchAccountTypeFlow.getAccountTypeByMnemonic(mnemonic);
+        if(null == newCreationDate)
+        {
+            newCreationDate = tempAccTpeDto.getCreationDate();              //Set the creation date to today's date if none is provided
+        }
+        AccountTypeDto accountType = new AccountTypeDto(mnemonic, newAccountTypeName, newCreationDate);
+        AccountTypeDto accountTypeResponse = modifyAccountTypeFlow.updateAccountType(accountType);
         GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountType);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }*/
+
+    }
 
 
 }

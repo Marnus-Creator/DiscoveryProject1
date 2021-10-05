@@ -8,6 +8,7 @@ import za.ac.nwu.ac.logic.flow.ModifyAccountTypeFlow;
 import za.ac.nwu.ac.translator.AccountTypeTranslator;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 
 @Transactional
 @Component
@@ -40,5 +41,14 @@ public class ModifyAccountTypeFlowImpl implements ModifyAccountTypeFlow {
         return result;
     }
 
+    /*@Override
+    public AccountTypeDto updateAccountType(String mnemonic, String newAccountTypeName, LocalDate newCreationDate) {
+
+        LOGGER.info("AccountType to Update, use input object {}", accountType);
+
+        AccountTypeDto result =accountTypeTranslator.updateAccountType(accountType);
+        LOGGER.info("AccountType was updated, used output object {}", result);
+        return result;
+    }*/
 
 }
