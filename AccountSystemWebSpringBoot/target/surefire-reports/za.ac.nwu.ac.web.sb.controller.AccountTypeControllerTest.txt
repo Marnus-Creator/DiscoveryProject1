@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: za.ac.nwu.ac.web.sb.controller.AccountTypeControllerTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.82 s - in za.ac.nwu.ac.web.sb.controller.AccountTypeControllerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.164 s - in za.ac.nwu.ac.web.sb.controller.AccountTypeControllerTest

@@ -33,6 +33,12 @@ public class UserAccount implements Serializable {
         this.creationDate = creationDate;
     }
 
+    public UserAccount(Long userAccountId, Integer accountBalance, Long memberId) {
+        this.userAccountId = userAccountId;
+        this.accountBalance = accountBalance;
+        this.memberId = memberId;
+    }
+
     @Id
     @SequenceGenerator(name = "USER_ACCOUNT_ID_SEQ", sequenceName = "MARNUS.USER_ACCOUNT_ID_SEQ", allocationSize = 1)       //SequenceName =?
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_ACCOUNT_ID_SEQ")

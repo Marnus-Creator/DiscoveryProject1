@@ -3,6 +3,8 @@ package za.ac.nwu.ac.domain.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import za.ac.nwu.ac.domain.persistence.UserAccount;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -17,18 +19,25 @@ public class UserAccountDto implements Serializable {
 
     private Long userAccountId;
     private Long accountTypeId;
-    private Long accountBalance;
+    private Integer accountBalance;
     private Long memberId;
 
     public UserAccountDto() {
     }
 
-    public UserAccountDto(Long userAccountId, Long accountTypeId, Long accountBalance, Long memberId) {
+    public UserAccountDto(Long userAccountId, Long accountTypeId, Integer accountBalance, Long memberId) {
         this.userAccountId = userAccountId;
         this.accountTypeId = accountTypeId;
         this.accountBalance = accountBalance;
         this.memberId = memberId;
     }
+    public UserAccountDto(UserAccount userAccount){
+        this.userAccountId = userAccount.getUserAccountId();
+        this.accountTypeId = userAccount.getAccountTypeId();
+        this.accountBalance = userAccount.getAccountBalance();
+        this.memberId = userAccount.getMemberId();
+    }
+
 
     @ApiModelProperty(
             position = 1,
@@ -76,11 +85,11 @@ public class UserAccountDto implements Serializable {
             allowEmptyValue = false,
             required = true
     )
-    public Long getAccountBalance() {
+    public Integer getAccountBalance() {
         return accountBalance;
     }
 
-    public void setAccountBalance(Long accountBalance) {
+    public void setAccountBalance(Integer accountBalance) {
         this.accountBalance = accountBalance;
     }
 
