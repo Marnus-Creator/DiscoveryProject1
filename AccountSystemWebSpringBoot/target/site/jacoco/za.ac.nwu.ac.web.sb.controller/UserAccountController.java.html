@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserAccountController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AccountSystemWebSpringBoot</a> &gt; <a href="index.source.html" class="el_package">za.ac.nwu.ac.web.sb.controller</a> &gt; <span class="el_source">UserAccountController.java</span></div><h1>UserAccountController.java</h1><pre class="source lang-java linenums">package za.ac.nwu.ac.web.sb.controller;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.models.Response;
+import org.apache.catalina.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import za.ac.nwu.ac.domain.dto.UserAccountDto;
+import za.ac.nwu.ac.domain.service.GeneralResponse;
+import za.ac.nwu.ac.logic.flow.ModifyUserAccountFlow;
+
+@RestController
+@RequestMapping(&quot;user-account&quot;)
+public class UserAccountController {
+<span class="nc" id="L22">    private final Logger LOGGER = LoggerFactory.getLogger(UserAccountController.class);</span>
+
+    private final ModifyUserAccountFlow modifyUserAccountFlow;
+
+    @Autowired
+<span class="nc" id="L27">    public UserAccountController(ModifyUserAccountFlow modifyUserAccountFlow) {</span>
+<span class="nc" id="L28">        this.modifyUserAccountFlow = modifyUserAccountFlow;</span>
+<span class="nc" id="L29">    }</span>
+
+    @PutMapping(&quot;subtract/{subtract}&quot;)
+    @ApiOperation(value = &quot;Subtract value from the UserAccount&quot;,
+    notes=&quot;&quot;)
+    @ApiResponses(value={
+            @ApiResponse(code=201, message = &quot;Account Type Successfully Updated&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 400, message = &quot;Bad Request&quot;, response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = &quot;Internal Server Error&quot;, response = GeneralResponse.class)
+    })
+    public ResponseEntity&lt;GeneralResponse&lt;UserAccountDto&gt;&gt;subtractUserAccount(
+            @ApiParam(value=&quot;Transaction Value&quot;,
+                    name=&quot;subtract&quot;,
+                    example = &quot;600&quot;,
+                    required = true)
+            @PathVariable(&quot;subtract&quot;) final String subtractValue,
+
+            @ApiParam(value = &quot;The MemberID that uniquely identifies the UserAccountOwner.&quot;,
+                    name = &quot;memberID&quot;,
+                    example = &quot;1000000001&quot;,
+                    required = true)
+            @RequestParam(&quot;memberID&quot;) final Long memberID,
+
+            @ApiParam(value = &quot;The AccountTypeID that uniquely identifies the AccountType.&quot;,
+                    name=&quot;accountTypeID&quot;,
+                    example = &quot;100000000000008&quot;,
+                    required = true)
+            @RequestParam(&quot;accountTypeID&quot;) final Long accountTypeID
+    ){
+<span class="nc" id="L58">        Integer intToPass =0;</span>
+        try{
+<span class="nc" id="L60">            intToPass = Integer.parseInt(subtractValue);</span>
+<span class="nc" id="L61">        }catch (NumberFormatException e){</span>
+<span class="nc" id="L62">            LOGGER.error(&quot;Subtract Value parse operation failed&quot;, e);</span>
+<span class="nc" id="L63">        }</span>
+<span class="nc" id="L64">        LOGGER.info(&quot;Value of SubtractValue {}&quot;, subtractValue);</span>
+<span class="nc" id="L65">        LOGGER.info(&quot;Value of MemberID {}&quot;, memberID);</span>
+<span class="nc" id="L66">        LOGGER.info(&quot;Value of AccountTypeID {}&quot;, accountTypeID);</span>
+
+<span class="nc" id="L68">        UserAccountDto userAccount = modifyUserAccountFlow.subtractCurrency(intToPass, memberID, accountTypeID);</span>
+<span class="nc" id="L69">        LOGGER.info(&quot;Update operation completed successfully&quot;);</span>
+<span class="nc" id="L70">        GeneralResponse&lt;UserAccountDto&gt; response = new GeneralResponse&lt;&gt;(true, userAccount);</span>
+<span class="nc" id="L71">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
