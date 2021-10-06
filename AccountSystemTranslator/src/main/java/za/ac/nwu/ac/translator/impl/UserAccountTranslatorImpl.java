@@ -1,5 +1,6 @@
 package za.ac.nwu.ac.translator.impl;
 
+import org.springframework.stereotype.Component;
 import za.ac.nwu.ac.domain.dto.UserAccountDto;
 import za.ac.nwu.ac.domain.persistence.UserAccount;
 import za.ac.nwu.ac.repo.persistence.UserAccountRepository;
@@ -7,6 +8,7 @@ import za.ac.nwu.ac.translator.UserAccountTranslator;
 
 import java.util.logging.Logger;
 
+@Component
 public class UserAccountTranslatorImpl implements UserAccountTranslator {
     private final UserAccountRepository userAccountRepository;
 

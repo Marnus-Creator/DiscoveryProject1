@@ -1,5 +1,6 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 AccountSystemWebSpringBoot,za.ac.nwu.ac.web.sb.controller,AccountTypeController,20,94,1,1,4,20,2,5,1,5
+AccountSystemWebSpringBoot,za.ac.nwu.ac.web.sb.controller,UserAccountController,62,0,0,0,16,0,2,0,2,0
 AccountSystemWebSpringBoot,za.ac.nwu.ac.web.sb,RestServiceApplication,8,0,0,0,2,0,2,0,2,0
 AccountSystemWebSpringBoot,za.ac.nwu.ac.web.sb.config,WebConfig,3,0,0,0,1,0,1,0,1,0
 AccountSystemWebSpringBoot,za.ac.nwu.ac.web.sb.config,SwaggerConfiguration,40,0,0,0,10,0,3,0,3,0

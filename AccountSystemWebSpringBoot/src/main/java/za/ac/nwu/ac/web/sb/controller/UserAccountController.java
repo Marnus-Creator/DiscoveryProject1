@@ -51,7 +51,7 @@ public class UserAccountController {
 
             @ApiParam(value = "The AccountTypeID that uniquely identifies the AccountType.",
                     name="accountTypeID",
-                    example = "1000000001",
+                    example = "100000000000008",
                     required = true)
             @RequestParam("accountTypeID") final Long accountTypeID
     ){

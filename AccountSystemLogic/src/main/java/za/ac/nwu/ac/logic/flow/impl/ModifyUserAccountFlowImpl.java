@@ -2,12 +2,14 @@ package za.ac.nwu.ac.logic.flow.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import za.ac.nwu.ac.domain.dto.UserAccountDto;
 import za.ac.nwu.ac.logic.flow.ModifyUserAccountFlow;
 import za.ac.nwu.ac.translator.UserAccountTranslator;
 
 import javax.transaction.Transactional;
 
+@Component
 public class ModifyUserAccountFlowImpl implements ModifyUserAccountFlow {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ModifyUserAccountFlowImpl.class);

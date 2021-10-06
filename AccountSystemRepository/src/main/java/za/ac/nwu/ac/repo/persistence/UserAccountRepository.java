@@ -15,15 +15,15 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, Long> 
             "FROM " +
             "UserAccount ua " +
             "WHERE " +
-            "ua.memberID = :member " +
-            "AND ua.accountTypeID = : accountType")
+            "ua.memberId = :member " +
+            "AND ua.accountTypeId = :accountType")
     UserAccount getUserByMemberIDAndAccountTypeID(@Param("member") Long memberID, @Param("accountType")Long accountTypeID);
 
     @Modifying
     @Query(value = "UPDATE " +
             "UserAccount ua " +
             "SET ua.accountBalance = :accountBalance " +
-            "WHERE ua.memberID = :memberID " +
-            "AND ua.accountTypeID = :accountTypeID")
+            "WHERE ua.memberId = :memberID " +
+            "AND ua.accountTypeId = :accountTypeID")
     void updateUserAccount(@Param("accountBalance") Integer newBal,@Param("memberID") Long memberId,@Param("accountTypeID") Long accountTypeId);
 }

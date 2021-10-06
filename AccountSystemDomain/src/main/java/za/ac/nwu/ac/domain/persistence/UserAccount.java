@@ -16,22 +16,19 @@ public class UserAccount implements Serializable {
     private Long accountTypeId;
     private Integer accountBalance;
     private Long memberId;
-    private LocalDate creationDate;
 
     public UserAccount(Long userAccountId, Long accountTypeId, Integer accountBalance, Long memberId, LocalDate creationDate) {
         this.userAccountId = userAccountId;
         this.accountTypeId = accountTypeId;
         this.accountBalance = accountBalance;
         this.memberId = memberId;
-        this.creationDate = creationDate;
-    }
+        }
 
     public UserAccount(Long accountTypeId, Integer accountBalance, Long memberId, LocalDate creationDate) {
         this.accountTypeId = accountTypeId;
         this.accountBalance = accountBalance;
         this.memberId = memberId;
-        this.creationDate = creationDate;
-    }
+        }
 
     public UserAccount(Long userAccountId, Integer accountBalance, Long memberId) {
         this.userAccountId = userAccountId;
@@ -50,7 +47,7 @@ public class UserAccount implements Serializable {
     public void setUserAccountId(Long userAccountId) {
         this.userAccountId = userAccountId;
     }
-
+    @Column(name = "ACCOUNT_TYPE_ID")
     public Long getAccountTypeId() {
         return accountTypeId;
     }
@@ -58,7 +55,7 @@ public class UserAccount implements Serializable {
     public void setAccountTypeId(Long accountTypeId) {
         this.accountTypeId = accountTypeId;
     }
-
+@Column(name = "ACCOUNT_BALANCE")
     public Integer getAccountBalance() {
         return accountBalance;
     }
@@ -66,7 +63,7 @@ public class UserAccount implements Serializable {
     public void setAccountBalance(Integer accountBalance) {
         this.accountBalance = accountBalance;
     }
-
+@Column(name = "MEMBER_ID")
     public Long getMemberId() {
         return memberId;
     }
@@ -75,25 +72,17 @@ public class UserAccount implements Serializable {
         this.memberId = memberId;
     }
 
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserAccount that = (UserAccount) o;
-        return Objects.equals(userAccountId, that.userAccountId) && Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(accountBalance, that.accountBalance) && Objects.equals(memberId, that.memberId) && Objects.equals(creationDate, that.creationDate);
+        return Objects.equals(userAccountId, that.userAccountId) && Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(accountBalance, that.accountBalance) && Objects.equals(memberId, that.memberId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userAccountId, accountTypeId, accountBalance, memberId, creationDate);
+        return Objects.hash(userAccountId, accountTypeId, accountBalance, memberId);
     }
 
     @Override
@@ -103,7 +92,6 @@ public class UserAccount implements Serializable {
                 ", accountTypeId=" + accountTypeId +
                 ", accountBalance=" + accountBalance +
                 ", memberId=" + memberId +
-                ", creationDate=" + creationDate +
                 '}';
     }
 }
