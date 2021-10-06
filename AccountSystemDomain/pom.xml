@@ -16,7 +16,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
+            <groupId>org.springframework.boot</groupId>         <!--Needed for a lot of stuff, including LOGGING, added it here to use throughout project-->
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
         <dependency>                                            <!--Need this dependency here-->
