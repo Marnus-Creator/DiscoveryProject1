@@ -17,6 +17,9 @@ public class UserAccount implements Serializable {
     private Integer accountBalance;
     private Long memberId;
 
+    public UserAccount() {
+    }
+
     public UserAccount(Long userAccountId, Long accountTypeId, Integer accountBalance, Long memberId, LocalDate creationDate) {
         this.userAccountId = userAccountId;
         this.accountTypeId = accountTypeId;
