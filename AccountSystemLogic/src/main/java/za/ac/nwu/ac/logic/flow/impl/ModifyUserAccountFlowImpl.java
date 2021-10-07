@@ -50,8 +50,36 @@ public class ModifyUserAccountFlowImpl implements ModifyUserAccountFlow {
         }
     }
 
+    @Transactional
     @Override
-    public UserAccountDto addCurrency(Integer subtractVal, Long memberId, Long accountTypeId) {
-        return null;
+    public UserAccountDto addCurrency(Integer AddVal, Long memberId, Long accountTypeId)
+    {
+        if(AddVal <= 0)
+        {
+            LOGGER.warn("Cannot add negative or 0 amounts ");
+            throw new RuntimeException("Cannot add negative or 0 amounts");
+        }
+
+
+        LOGGER.info("The UserAccount te Update has input values: " +
+                "\nSubtractValue = {}" +
+                "\nMemberID = {}" +
+                "\nAccountTypeID = {}",AddVal, memberId, accountTypeId);
+
+        Integer oldBal =0;
+        Integer newBal =0;
+
+        oldBal =Integer.parseInt(String.valueOf(userAccountTranslator.getUserByMemberIDAndAccountTypeID(memberId, accountTypeId).getAccountBalance()));
+
+        if((AddVal + oldBal) >= 0){
+            LOGGER.info("Transaction is valid");
+            newBal = oldBal + AddVal;
+            UserAccountDto result = userAccountTranslator.updateUserAccount(newBal, memberId, accountTypeId);
+            LOGGER.info("UserAccount was updated and has return object {}", result);
+            return result;
+        }else{
+            LOGGER.warn("Transaction is not valid - Cannot subtract more tha you own!");
+            throw new RuntimeException("Unable to update the database");
+        }
     }
 }
