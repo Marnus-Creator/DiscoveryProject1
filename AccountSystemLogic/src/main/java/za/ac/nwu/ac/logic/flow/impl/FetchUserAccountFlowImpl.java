@@ -24,9 +24,9 @@ public class FetchUserAccountFlowImpl implements FetchUserAccountFlow {
     }
 
     @Override
-    public UserAccountDto getUserByMemberIDandAccountID(Long userAccountID, Long accountTypeID)
+    public UserAccountDto getUserDetailsByMemberIDandAccountID(Long memberID, Long accountTypeID)
     {
-        UserAccountDto result = userAccountTranslator.getUserByMemberIDAndAccountTypeID(userAccountID, accountTypeID);
+        UserAccountDto result = userAccountTranslator.getUserByMemberIDAndAccountTypeID(memberID, accountTypeID);
         LOGGER.info("The UserAccountDto is {}", result);
         return result;
     }

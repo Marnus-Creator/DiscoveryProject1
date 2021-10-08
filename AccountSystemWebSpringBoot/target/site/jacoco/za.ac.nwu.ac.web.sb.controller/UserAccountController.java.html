@@ -4,8 +4,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.models.Response;
-import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +12,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.ac.domain.dto.UserAccountDto;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
+import za.ac.nwu.ac.logic.flow.FetchUserAccountFlow;
 import za.ac.nwu.ac.logic.flow.ModifyUserAccountFlow;
 
 @RestController
 @RequestMapping(&quot;user-account&quot;)
 public class UserAccountController {
-<span class="nc" id="L22">    private final Logger LOGGER = LoggerFactory.getLogger(UserAccountController.class);</span>
+<span class="nc" id="L21">    private final Logger LOGGER = LoggerFactory.getLogger(UserAccountController.class);</span>
 
     private final ModifyUserAccountFlow modifyUserAccountFlow;
+    private final FetchUserAccountFlow fetchUserAccountFlow;
 
     @Autowired
-<span class="nc" id="L27">    public UserAccountController(ModifyUserAccountFlow modifyUserAccountFlow) {</span>
+<span class="nc" id="L27">    public UserAccountController(ModifyUserAccountFlow modifyUserAccountFlow, FetchUserAccountFlow fetchUserAccountFlow) {</span>
 <span class="nc" id="L28">        this.modifyUserAccountFlow = modifyUserAccountFlow;</span>
-<span class="nc" id="L29">    }</span>
+<span class="nc" id="L29">        this.fetchUserAccountFlow = fetchUserAccountFlow;</span>
+<span class="nc" id="L30">    }</span>
 
     @PutMapping(&quot;subtract/{subtract}&quot;)
     @ApiOperation(value = &quot;Subtract value from the UserAccount&quot;,
@@ -53,28 +54,29 @@ public class UserAccountController {
                     name=&quot;accountTypeID&quot;,
                     example = &quot;100000000000008&quot;,
                     required = true)
-            @RequestParam(&quot;accountTypeID&quot;) final Long accountTypeID
-    ){
-<span class="nc" id="L58">        Integer intToPass =0;</span>
+            @RequestParam(&quot;accountTypeID&quot;) final Long accountTypeID)
+    {
+<span class="nc" id="L59">        Integer intToPass =0;</span>
         try{
-<span class="nc" id="L60">            intToPass = Integer.parseInt(subtractValue);</span>
-<span class="nc" id="L61">        }catch (NumberFormatException e){</span>
-<span class="nc" id="L62">            LOGGER.error(&quot;Subtract Value parse operation failed&quot;, e);</span>
-<span class="nc" id="L63">        }</span>
-<span class="nc" id="L64">        LOGGER.info(&quot;Value of SubtractValue {}&quot;, subtractValue);</span>
-<span class="nc" id="L65">        LOGGER.info(&quot;Value of MemberID {}&quot;, memberID);</span>
-<span class="nc" id="L66">        LOGGER.info(&quot;Value of AccountTypeID {}&quot;, accountTypeID);</span>
+<span class="nc" id="L61">            intToPass = Integer.parseInt(subtractValue);</span>
+<span class="nc" id="L62">        }catch (NumberFormatException e){</span>
+<span class="nc" id="L63">            LOGGER.error(&quot;Subtract Value parse operation failed&quot;, e);</span>
+<span class="nc" id="L64">        }</span>
+<span class="nc" id="L65">        LOGGER.info(&quot;Value of SubtractValue {}&quot;, subtractValue);</span>
+<span class="nc" id="L66">        LOGGER.info(&quot;Value of MemberID {}&quot;, memberID);</span>
+<span class="nc" id="L67">        LOGGER.info(&quot;Value of AccountTypeID {}&quot;, accountTypeID);</span>
 
-<span class="nc" id="L68">        UserAccountDto userAccount = modifyUserAccountFlow.subtractCurrency(intToPass, memberID, accountTypeID);</span>
-<span class="nc" id="L69">        LOGGER.info(&quot;Update operation completed successfully&quot;);</span>
-<span class="nc" id="L70">        GeneralResponse&lt;UserAccountDto&gt; response = new GeneralResponse&lt;&gt;(true, userAccount);</span>
-<span class="nc" id="L71">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+<span class="nc" id="L69">        UserAccountDto userAccount = modifyUserAccountFlow.subtractCurrency(intToPass, memberID, accountTypeID);</span>
+<span class="nc" id="L70">        LOGGER.info(&quot;Update operation completed successfully&quot;);</span>
+<span class="nc" id="L71">        GeneralResponse&lt;UserAccountDto&gt; response = new GeneralResponse&lt;&gt;(true, userAccount);</span>
+<span class="nc" id="L72">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
     }
 
     @PutMapping(&quot;add/{add}&quot;)
     @ApiOperation(value = &quot;Add value from the UserAccount&quot;,
             notes=&quot;&quot;)
-    @ApiResponses(value={
+    @ApiResponses(value=
+            {
             @ApiResponse(code=201, message = &quot;Account Type Successfully Updated&quot;, response = GeneralResponse.class),
             @ApiResponse(code = 400, message = &quot;Bad Request&quot;, response = GeneralResponse.class),
             @ApiResponse(code = 500, message = &quot;Internal Server Error&quot;, response = GeneralResponse.class)
@@ -98,23 +100,66 @@ public class UserAccountController {
                     required = true)
             @RequestParam(&quot;accountTypeID&quot;) final Long accountTypeID
     ){
-<span class="nc" id="L101">        Integer intToPass =0;</span>
+<span class="nc" id="L103">        Integer intToPass =0;</span>
         try{
-<span class="nc" id="L103">            intToPass = Integer.parseInt(addValue);</span>
-<span class="nc" id="L104">        }catch (NumberFormatException e){</span>
-<span class="nc" id="L105">            LOGGER.error(&quot;Add Value parse operation failed&quot;, e);</span>
-<span class="nc" id="L106">        }</span>
-<span class="nc" id="L107">        LOGGER.info(&quot;Value of AddValue {}&quot;, addValue);</span>
-<span class="nc" id="L108">        LOGGER.info(&quot;Value of MemberID {}&quot;, memberID);</span>
-<span class="nc" id="L109">        LOGGER.info(&quot;Value of AccountTypeID {}&quot;, accountTypeID);</span>
+<span class="nc" id="L105">            intToPass = Integer.parseInt(addValue);</span>
+<span class="nc" id="L106">        }catch (NumberFormatException e){</span>
+<span class="nc" id="L107">            LOGGER.error(&quot;Add Value parse operation failed&quot;, e);</span>
+<span class="nc" id="L108">        }</span>
+<span class="nc" id="L109">        LOGGER.info(&quot;Value of AddValue {}&quot;, addValue);</span>
+<span class="nc" id="L110">        LOGGER.info(&quot;Value of MemberID {}&quot;, memberID);</span>
+<span class="nc" id="L111">        LOGGER.info(&quot;Value of AccountTypeID {}&quot;, accountTypeID);</span>
 
-<span class="nc" id="L111">        UserAccountDto userAccount = modifyUserAccountFlow.addCurrency(intToPass, memberID, accountTypeID);</span>
-<span class="nc" id="L112">        LOGGER.info(&quot;Update operation completed successfully&quot;);</span>
-<span class="nc" id="L113">        GeneralResponse&lt;UserAccountDto&gt; response = new GeneralResponse&lt;&gt;(true, userAccount);</span>
-<span class="nc" id="L114">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+<span class="nc" id="L113">        UserAccountDto userAccount = modifyUserAccountFlow.addCurrency(intToPass, memberID, accountTypeID);</span>
+<span class="nc" id="L114">        LOGGER.info(&quot;Update operation completed successfully&quot;);</span>
+<span class="nc" id="L115">        GeneralResponse&lt;UserAccountDto&gt; response = new GeneralResponse&lt;&gt;(true, userAccount);</span>
+<span class="nc" id="L116">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
     }
 
+   @GetMapping(&quot;{View Miles}&quot;)                                                           //Making use of a path variable
+   @ApiOperation(value=&quot;Fetches UserAccount details for specified MemberID and AccountTypeID&quot;,
+           notes = &quot;Fetches a UserAccount for specified MemberID and AccountTypeID&quot;)
+   @ApiResponses(value = {
+           @ApiResponse(code = 200, message = &quot;AccountTypes Returned&quot;, response = GeneralResponse.class),
+           @ApiResponse(code = 400, message = &quot;Sorry, Bad request&quot;, response = GeneralResponse.class),
+           @ApiResponse(code = 404, message = &quot;Not Found&quot;, response = GeneralResponse.class),
+           @ApiResponse(code = 500, message = &quot;Internal Server Error&quot;, response = GeneralResponse.class)
+   })
+   public ResponseEntity&lt;GeneralResponse&lt;UserAccountDto&gt;&gt; getUserDetailsByMemberIDandAccountID(
+           @ApiParam(value = &quot;The MemberID, uniquely identifies the specific UserAccount.&quot;,
+                   name = &quot;memberID&quot;,
+                   example = &quot;100000000000008&quot;,
+                   required = true)
+           @PathVariable(&quot;memberID&quot;)final String memberID,
 
+           @ApiParam(value = &quot;The AccountTypeID, uniquely identifies the specific AccountType.&quot;,
+                   name = &quot;accountTypeID&quot;,
+                   example = &quot;100000000000008&quot;,
+                   required = true)
+           @PathVariable(&quot;accountTypeID&quot;) final String accountTypeID){
+
+<span class="nc" id="L141">       Long userToPass = Long.valueOf(0);</span>
+<span class="nc" id="L142">       Long accTypeToPass = Long.valueOf(0);</span>
+
+       try
+       {
+<span class="nc" id="L146">           userToPass = Long.parseLong(memberID);</span>
+<span class="nc" id="L147">           accTypeToPass = Long.parseLong(accountTypeID);</span>
+
+       }
+<span class="nc" id="L150">       catch(NumberFormatException e)</span>
+       {
+<span class="nc" id="L152">           LOGGER.error(&quot;Parses Failed&quot;, e);</span>
+<span class="nc" id="L153">       }</span>
+
+<span class="nc" id="L155">       LOGGER.info(&quot;Trying to find UserAccount with properties: &quot; +</span>
+               &quot;\nAccountTypeID = {}&quot; +
+               &quot;\nMemberID = {}&quot;,accountTypeID,memberID);
+<span class="nc" id="L158">       UserAccountDto userAccount =fetchUserAccountFlow.getUserDetailsByMemberIDandAccountID(userToPass , accTypeToPass);</span>
+<span class="nc" id="L159">       LOGGER.info(&quot;User Account with specified properties found.&quot;);</span>
+<span class="nc" id="L160">       GeneralResponse&lt;UserAccountDto&gt; response = new GeneralResponse&lt;&gt;(true, userAccount);</span>
+<span class="nc" id="L161">       return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+   }
 
 
 }
