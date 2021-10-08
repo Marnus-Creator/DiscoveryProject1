@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.domain.dto.UserAccountDto;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
 import za.ac.nwu.ac.logic.flow.ModifyUserAccountFlow;
@@ -114,7 +115,25 @@ public class UserAccountController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-
+   /* @GetMapping("{View Miles}")                                                           //Making use of a path variable
+    @ApiOperation(value = "Views the user's Miles.", notes = "Fetches the Miles corresponding to the given user.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Goal Found"),
+            @ApiResponse(code = 400, message = "Sorry, Bad request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Resource is NOT FOUND", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)
+    })
+    public ResponseEntity<GeneralResponse<AccountTypeDto>> getAccountType(
+            @ApiParam(value = "The mnemonic that uniquely identifies the AccountType.",
+                    example = "MILES",
+                    name = "mnemonic",
+                    required = true)
+            @PathVariable("mnemonic") final String mnemonic)                            //Typically a mandatory, PathVariable is needed
+    {
+        AccountTypeDto accountType = fetchAccountTypeFlow.getAccountTypeByMnemonic(mnemonic);
+        GeneralResponse<AccountTypeDto> response = new GeneralResponse<>(true, accountType);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }*/
 
 
 }
