@@ -24,12 +24,12 @@ public interface AccountTypeRepository extends JpaRepository<AccountType, Long> 
             "AccountType at " + "WHERE at.mnemonic = :mnemonic")
     AccountType getAccountTypeDtoByMnemonic(String mnemonic);
 
-    //ToDo: possible need to fix delete
+
     @Modifying
     @Query(value = "DELETE FROM " + "AccountType at " + "WHERE at.mnemonic = :mnemonic ")
     void deleteAcountType( String mnemonic);
 
-    //ToDO: possible need to fix updateAccountType
+
     @Modifying
     @Query(value = "Update " + "AccountType at " + "set " + "at.accountTypeName = :newAccountTypeName, " +
             "at.creationDate = :newCreationDate " + "WHERE at.mnemonic = :mnemonic")

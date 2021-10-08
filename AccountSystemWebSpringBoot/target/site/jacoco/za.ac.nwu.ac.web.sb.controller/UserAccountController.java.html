@@ -116,7 +116,7 @@ public class UserAccountController {
 <span class="nc" id="L116">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
     }
 
-   @GetMapping(&quot;{View Miles}&quot;)                                                           //Making use of a path variable
+    @GetMapping(&quot;{memberID}/{accountTypeID}&quot;)                                                           //Making use of a path variable
    @ApiOperation(value=&quot;Fetches UserAccount details for specified MemberID and AccountTypeID&quot;,
            notes = &quot;Fetches a UserAccount for specified MemberID and AccountTypeID&quot;)
    @ApiResponses(value = {
@@ -128,7 +128,7 @@ public class UserAccountController {
    public ResponseEntity&lt;GeneralResponse&lt;UserAccountDto&gt;&gt; getUserDetailsByMemberIDandAccountID(
            @ApiParam(value = &quot;The MemberID, uniquely identifies the specific UserAccount.&quot;,
                    name = &quot;memberID&quot;,
-                   example = &quot;100000000000008&quot;,
+                   example = &quot;1000000001&quot;,
                    required = true)
            @PathVariable(&quot;memberID&quot;)final String memberID,
 
@@ -145,20 +145,19 @@ public class UserAccountController {
        {
 <span class="nc" id="L146">           userToPass = Long.parseLong(memberID);</span>
 <span class="nc" id="L147">           accTypeToPass = Long.parseLong(accountTypeID);</span>
-
        }
-<span class="nc" id="L150">       catch(NumberFormatException e)</span>
+<span class="nc" id="L149">       catch(NumberFormatException e)</span>
        {
-<span class="nc" id="L152">           LOGGER.error(&quot;Parses Failed&quot;, e);</span>
-<span class="nc" id="L153">       }</span>
+<span class="nc" id="L151">           LOGGER.error(&quot;Parses Failed&quot;, e);</span>
+<span class="nc" id="L152">       }</span>
 
-<span class="nc" id="L155">       LOGGER.info(&quot;Trying to find UserAccount with properties: &quot; +</span>
+<span class="nc" id="L154">       LOGGER.info(&quot;Trying to find UserAccount with properties: &quot; +</span>
                &quot;\nAccountTypeID = {}&quot; +
                &quot;\nMemberID = {}&quot;,accountTypeID,memberID);
-<span class="nc" id="L158">       UserAccountDto userAccount =fetchUserAccountFlow.getUserDetailsByMemberIDandAccountID(userToPass , accTypeToPass);</span>
-<span class="nc" id="L159">       LOGGER.info(&quot;User Account with specified properties found.&quot;);</span>
-<span class="nc" id="L160">       GeneralResponse&lt;UserAccountDto&gt; response = new GeneralResponse&lt;&gt;(true, userAccount);</span>
-<span class="nc" id="L161">       return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+<span class="nc" id="L157">       UserAccountDto userAccount =fetchUserAccountFlow.getUserDetailsByMemberIDandAccountID(userToPass , accTypeToPass);</span>
+<span class="nc" id="L158">       LOGGER.info(&quot;User Account with specified properties found.&quot;);</span>
+<span class="nc" id="L159">       GeneralResponse&lt;UserAccountDto&gt; response = new GeneralResponse&lt;&gt;(true, userAccount);</span>
+<span class="nc" id="L160">       return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
    }
 
 
