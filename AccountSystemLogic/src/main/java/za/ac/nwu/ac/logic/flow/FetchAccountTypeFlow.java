@@ -10,5 +10,5 @@ public interface FetchAccountTypeFlow {
 
     AccountTypeDto getAccountTypeByMnemonic(String mnemonic);
 
-    UserAccountDto getUserByMemberIDandAccountID(Long userAccountID, Long accountTypeID);
+    //UserAccountDto getUserByMemberIDandAccountID(Long userAccountID, Long accountTypeID);
 }

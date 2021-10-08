@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 @Component
 public class FetchUserAccountFlowImpl implements FetchUserAccountFlow {
     private static final Logger LOGGER = LoggerFactory.getLogger(FetchUserAccountFlowImpl.class);
+
     private final UserAccountTranslator userAccountTranslator;
 
     public FetchUserAccountFlowImpl(UserAccountTranslator userAccountTranslator)
