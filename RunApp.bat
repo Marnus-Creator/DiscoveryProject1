@@ -1,0 +1,1 @@
+java -jar ./AccountSystemWebSpringBoot/target/AccountSystemWebSpringBoot-1.0-SNAPSHOT.war
