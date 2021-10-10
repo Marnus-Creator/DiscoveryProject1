@@ -82,10 +82,14 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
     @Override
     @Transactional
     public AccountTypeDto deleteAcountType(String mnemonic) {
-        try{
+        try
+        {
             AccountType accountType = accountTypeRepository.getAccountTypeByMnemonic(mnemonic);
             accountTypeRepository.deleteAcountType(mnemonic);
-            return new AccountTypeDto(accountType);        }catch (Exception e){
+            return new AccountTypeDto(accountType);
+        }
+        catch (Exception e)
+        {
             throw new RuntimeException("Unable to read from DB ", e);
         }
     }
