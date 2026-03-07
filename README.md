@@ -1,4 +1,4 @@
-# DiscoveryProject1 - University project
+# DiscoveryProject - University project
 Ann Exercise app that tracks the miles you run to earn points
 
 Tech Stack used:
