@@ -1,7 +1,7 @@
-# DiscoveryProject1
+# DiscoveryProject1 - University project
 Ann Exercise app that tracks the miles you run to earn points
 
-Uses:
+Tech Stack used:
 -IntelliJ for the IDE
 -JAVA
 -Spring
